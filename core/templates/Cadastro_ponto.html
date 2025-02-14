@@ -6,7 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Funcionando</h1>
-    <p><a href="{% url 'PontosDeColeta' %}">Link para ponto de coleta</a></p>
+    <h1>cadastrar ponto</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <p><input type="submit" value="CadastrarPonto" /></p>
+    </form>
+    
+
 </body>
 </html>

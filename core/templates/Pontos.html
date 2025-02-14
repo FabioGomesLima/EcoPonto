@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>pontos cadastrados</h1>
+    <P><a href="{% url 'cadastro_ponto' %}"> CADASTRAR </a></P>
+    <p> Listagem de Pontos: </p>
+    {% for ponto in pontos %}
+    <p>
+        Título: {{ponto.tipo}}
+        | <a href="{% url 'editar_pontos' ponto.id %}"> EDITAR </a>
+        | <a href="{% url 'remover_pontos' ponto.id %}"> REMOVER </a>
+    </p>
+    {% empty %}
+    <p> Nenhum ponto cadastrado Cadastrado</p>
+    {% endfor %}
+   
+    
+   
+
+</body>
+</html>
