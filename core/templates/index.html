@@ -7,6 +7,12 @@
 </head>
 <body>
     <h1>Funcionando</h1>
-    <p><a href="{% url 'PontosDeColeta' %}">Link para ponto de coleta</a></p>
+    <p><a href="{% url 'Listar_pontos' %}">Link para ponto de coleta</a></p>
+    {% if not user.is_authenticated %}
+    <p><a href="{% url 'login' %}">Login</a></p>
+    {% endif %}
+    <p><a href="{% url 'logout' %}">Sair</a></p>
+
+
 </body>
 </html>

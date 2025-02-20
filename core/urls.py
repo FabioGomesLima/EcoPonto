@@ -1,13 +1,17 @@
 from django.urls import path
 from django.conf import settings
+from django.contrib.auth.views import LoginView, LogoutView
 from django.conf.urls.static import static
-from .views import index, PontosDeColeta, cadastro_ponto, editar_ponto, remover_ponto
 
+from . import views
 urlpatterns = [
-    path('', index, name= 'index' ),
-    path('PontosDeColeta/', PontosDeColeta, name='PontosDeColeta'),
-    path('cadastro_ponto/', cadastro_ponto, name='cadastro_ponto'),
-    path('editar_ponto/<int:id>/', editar_ponto, name='editar_ponto'),
-    path('remover_ponto/<int:id>', remover_ponto, name='remover_ponto'),
+    path('', views.index, name='index'),
+    path('pontos/', views.Listar_pontos, name='Listar_pontos'),
+    path('ponto_cadastrar', views.cadastrar_pontos, name='ponto_cadastrar'),
+    path('login/', LoginView.as_view(), name='login'),
+    path("logout/", LogoutView.as_view(), name="logout"),
+    path('ponto_excluir/<int:ponto_id>/', views.excluir_ponto, name='ponto_excluir')
     
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

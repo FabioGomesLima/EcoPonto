@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+
+
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +27,9 @@ SECRET_KEY = 'django-insecure-*+n9_1hdrzg=27h+x0uk3^ru(z*a+$&aoz*c_sd&7te$4vm(zz
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+
+
 
 ALLOWED_HOSTS = []
 
@@ -117,6 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'ponto_cadastrar'
+LOGOUT_REDIRECT_URL = 'index'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -127,4 +136,4 @@ AUTH_USER_MODEL = 'core.Usuarios'
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -1,43 +1,42 @@
-from django.shortcuts import render, redirect
-from .models import PontosDeColeta 
-from .forms import PontoForm
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .models import PontosDeColeta
+from .forms import PontoDeColetaForm
 
-# Create your views here.
 
-
-def index (request):
-    return render(request, 'index.html')
-
-def PontosDeColeta(request):
-    pontos = Ponto.objects.all()
-    contexto = {
-        'pontos': pontos
+def index(request):
+  return render(request, 'index.html')  
+    
+    
+    
+def Listar_pontos(request):
+    pontos = PontosDeColeta.objects.all()
+    contexto = { 
+         'todos_pontos':pontos     
     }
-    return render(request,'Pontos.html', contexto)
-
-def cadastro_ponto(request):
-    form = PontoForm(request.POST or None)
+    return render(request, 'Pontos.html',contexto )
+  
+@login_required 
+def cadastrar_pontos(request):
+  if request.method == 'POST':
+    form = PontoDeColetaForm(request.POST , request.FILES)
+  
     if form.is_valid():
-        form.save()
-        return redirect('PontosDeColeta')
-    contexto = {
-        'form': form
+      form.save()
+      return redirect('Listar_pontos')
+  else:
+    form = PontoDeColetaForm()
+  contexto = { 
+         'form_ponto': form   
     }
-    return render(request,'Cadastro_ponto.html', contexto)
+  return render(request, 'Cadastro_pontos.html',  contexto)
+  
+def is_admin(user):
+    return user.is_superuser
 
-def editar_ponto(request, id):
-    ponto = PontosDeColeta.objects.get(pk=id)
-    form = PontoForm(request.POST or None, instance=ponto)
-    if form.is_valid():
-        form.save()
-        return redirect('PontosDeColeta')
-    contexto = {
-        'form': form
-    }
-    return render(request, 'Cadastro_ponto.html', contexto)
-
-
-def remover_ponto(request, id):
-    ponto =  Ponto.objects.get(pk=id)
+@login_required
+@user_passes_test(is_admin)  # Apenas administradores podem excluir
+def excluir_ponto(request, ponto_id):
+    ponto = get_object_or_404(PontosDeColeta, id=ponto_id)
     ponto.delete()
-    return redirect('PontosDeColeta')
+    return redirect('Listar_pontos')

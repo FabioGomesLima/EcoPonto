@@ -6,13 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>cadastrar ponto</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <p><input type="submit" value="CadastrarPonto" /></p>
-    </form>
     
-
+    <p>cadastro de pontos: </p>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form_ponto.as_p }}
+<p><input type="submit" value="cadastrar"/></p>
 </body>
 </html>

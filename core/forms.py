@@ -1,12 +1,14 @@
-from django import forms
-from .models import PontosDeColeta
+from django.forms import ModelForm
+from .models import PontosDeColeta, Usuarios 
 
 
-class PontoForm(forms.ModelForm):
+class PontoDeColetaForm(ModelForm):
     class Meta:
         model = PontosDeColeta
-        fields = ['descricao', 'imagem', 'tipo', 'usuario']
-        widgets = {
-            'tipo': forms.RadioSelect(),
-            'usuario': forms.CheckboxSelectMultiple(),
-        }
+        fields = ['tipo', 'descricao', 'imagem', 'usuario']
+
+
+class UsuariosForm(ModelForm):
+    class Meta:
+        model = Usuarios
+        fields = ['email']

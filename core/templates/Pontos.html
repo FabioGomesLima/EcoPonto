@@ -6,21 +6,27 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>pontos cadastrados</h1>
-    <P><a href="{% url 'cadastro_ponto' %}"> CADASTRAR </a></P>
-    <p> Listagem de Pontos: </p>
-    {% for ponto in pontos %}
-    <p>
-        Título: {{ponto.tipo}}
-        | <a href="{% url 'editar_pontos' ponto.id %}"> EDITAR </a>
-        | <a href="{% url 'remover_pontos' ponto.id %}"> REMOVER </a>
-    </p>
-    {% empty %}
-    <p> Nenhum ponto cadastrado Cadastrado</p>
+    <p>Funcionando</p>
+    <p>Listagem de pontos: </p>
+    {% for ponto in todos_pontos %}
+    <p>Tipo:{{ponto.tipo}}</p>
+    <p>Descrição:{{ponto.descricao}}</p>
+    {% if ponto.imagem %}
+    <p>Imagem: <img src="{{ ponto.imagem.url }} alt="Imagem do ponto de coleta" width="500" height="300"></p>
+    {% endif %}
+            
+            {% if user.is_superuser %}
+                <form action="{% url 'ponto_excluir' ponto.id %}" method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="color: red;">Excluir</button>
+                </form>
+            {% endif %}
+        </div>
+        <hr>
+    {% empty%}
+    <p>sem pontos cadastrados </p>
     {% endfor %}
-   
+    <p><a href="{% url 'ponto_cadastrar' %}">Link para cadastrar ponto de coleta</a></p>
     
-   
-
 </body>
 </html>
