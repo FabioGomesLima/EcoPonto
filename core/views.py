@@ -4,6 +4,7 @@ from .models import PontosDeColeta
 from .forms import PontoDeColetaForm
 
 
+
 def index(request):
   return render(request, 'index.html')  
     
