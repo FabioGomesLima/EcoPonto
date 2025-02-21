@@ -10,7 +10,8 @@ urlpatterns = [
     path('ponto_cadastrar', views.cadastrar_pontos, name='ponto_cadastrar'),
     path('login/', LoginView.as_view(), name='login'),
     path("logout/", LogoutView.as_view(), name="logout"),
-    path('ponto_excluir/<int:ponto_id>/', views.excluir_ponto, name='ponto_excluir')
+    path('ponto_excluir/<int:ponto_id>/', views.excluir_ponto, name='ponto_excluir'),
+    path('ponto_editar/<int:ponto_id>/', views.editar_ponto, name='editar_ponto')
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:

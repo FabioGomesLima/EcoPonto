@@ -8,8 +8,7 @@ from .forms import PontoDeColetaForm
 def index(request):
   return render(request, 'index.html')  
     
-    
-    
+
 def Listar_pontos(request):
     pontos = PontosDeColeta.objects.all()
     contexto = { 
@@ -41,3 +40,18 @@ def excluir_ponto(request, ponto_id):
     ponto = get_object_or_404(PontosDeColeta, id=ponto_id)
     ponto.delete()
     return redirect('Listar_pontos')
+
+@login_required 
+def editar_ponto(request, ponto_id):
+  ponto = get_object_or_404(PontosDeColeta, pk=ponto_id)
+    
+  if request.method == 'POST':
+    form = PontoDeColetaForm(request.POST, request.FILES, instance=ponto)
+    if form.is_valid():
+        form.save()
+        return redirect('Listar_pontos')
+  else:
+    form = PontoDeColetaForm(instance=ponto)
+  
+  contexto = {'form_ponto': form}
+  return render(request, 'Cadastro_pontos.html', contexto)
