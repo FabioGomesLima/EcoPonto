@@ -12,7 +12,7 @@
     <p>Tipo:{{ponto.tipo}}</p>
     <p>Descrição:{{ponto.descricao}}</p>
     {% if ponto.imagem %}
-    <p>Imagem: <img src="{{ ponto.imagem.url }} alt="Imagem do ponto de coleta" width="500" height="300"></p>
+    <p>Imagem: <img src="{{ ponto.imagem.url }}" alt="Imagem do ponto de coleta" width="500" height="300"></p>
     {% endif %}
             
             {% if user.is_superuser %}
