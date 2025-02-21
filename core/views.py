@@ -20,8 +20,9 @@ def Listar_pontos(request):
 def cadastrar_pontos(request):
   if request.method == 'POST':
     form = PontoDeColetaForm(request.POST , request.FILES)
-  
     if form.is_valid():
+      ponto = form.save(commit=False)
+      ponto.usuario = request.user
       form.save()
       return redirect('Listar_pontos')
   else:
