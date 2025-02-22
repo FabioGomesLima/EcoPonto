@@ -1,18 +1,91 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EcoPonto</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
+    <!-- Biblioteca Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Funcionando</h1>
-    <p><a href="{% url 'Listar_pontos' %}">Link para ponto de coleta</a></p>
-    {% if not user.is_authenticated %}
-    <p><a href="{% url 'login' %}">Login</a></p>
-    {% endif %}
-    <p><a href="{% url 'logout' %}">Sair</a></p>
 
+    <header class="topo">
+        <div class="logo">EcoPonto</div>
+        <nav class="menu">
+            <a href="#">Tipos de Lixo</a>
+            <a href="#">Pontos de Coleta</a>
+            <a href="#">Dicas de Descarte</a>
+            <a href="#">Materiais Recicláveis</a>
+        </nav>
+        <div class="botao-menu">
+            <a href="{% url 'Listar_pontos' %}">Onde Descartar?</a>
+        </div>
+    </header>
+
+    <section class="banner">
+        <h1>Cuide do planeta, descarte corretamente.</h1>
+    </section>
+
+    <!-- Seção do vídeo -->
+    <section class="video-container">
+        <video id="videoInfo" controls>
+            <source src="{% static 'videos/descarte-eletronicos.mp4.mp4' %}" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+    </section>
+
+    <section class="container">
+        <h2>Pontos de Coleta</h2>
+        <p>Encontre locais próximos para descarte correto de resíduos.</p>
+        <button class="botao">Encontrar</button>
+    </section>
+
+    <!-- Seção do Gráfico -->
+    <section class="container">
+        <h2>Ranking de Descarte</h2>
+        <canvas id="rankingChart"></canvas>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+           
+            var dados = {
+                labels: ["Lucas", "Ana", "Carlos", "Mariana", "João"], // Nomes das pessoas
+                datasets: [{
+                    label: "Quantidade de lixo descartado (kg)",
+                    data: [30, 45, 20, 50, 38], // Quantidade em kg
+                    backgroundColor: ["#4CAF50", "#2196F3", "#FF9800", "#E91E63", "#9C27B0"]
+                }]
+            };
+
+            var ctx = document.getElementById("rankingChart").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: dados,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, // Permite ajustar o tamanho
+                    plugins: {
+                        legend: { display: false } 
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        });
+    </script>
+
+    <style>
+        #rankingChart {
+            width: 100%;
+            max-width: 800px;
+            max-height: 300px;
+            margin: auto;
+        }
+    </style>
 
 </body>
 </html>
