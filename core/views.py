@@ -2,11 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import PontosDeColeta
 from .forms import PontoDeColetaForm
+from django.contrib import messages
+
 
 
 
 def index(request):
-  return render(request, 'index.html')  
+    return render(request, 'index.html') 
+
+ 
     
 
 def Listar_pontos(request):
@@ -18,19 +22,19 @@ def Listar_pontos(request):
   
 @login_required 
 def cadastrar_pontos(request):
-  if request.method == 'POST':
-    form = PontoDeColetaForm(request.POST , request.FILES)
-    if form.is_valid():
-      ponto = form.save(commit=False)
-      ponto.usuario = request.user
-      form.save()
-      return redirect('Listar_pontos')
-  else:
-    form = PontoDeColetaForm()
-  contexto = { 
-         'form_ponto': form   
-    }
-  return render(request, 'Cadastro_pontos.html',  contexto)
+    if request.method == 'POST':
+        form = PontoDeColetaForm(request.POST, request.FILES)
+        if form.is_valid():
+            ponto = form.save(commit=False)
+            ponto.usuario = request.user
+            ponto.save()  
+            return redirect('Listar_pontos')
+    else:
+        form = PontoDeColetaForm()
+    
+    contexto = {'form_ponto': form}
+    return render(request, 'Cadastro_pontos.html', contexto)
+
   
 def is_admin(user):
     return user.is_superuser
