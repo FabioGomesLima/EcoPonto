@@ -1,5 +1,6 @@
 from django.forms import ModelForm
-from .models import PontosDeColeta, Usuarios 
+from .models import PontosDeColeta, Usuarios
+from django.contrib.auth.forms import UserCreationForm
 
 
 class PontoDeColetaForm(ModelForm):
@@ -8,7 +9,7 @@ class PontoDeColetaForm(ModelForm):
         fields = ['tipo', 'descricao', 'imagem']
 
 
-class UsuariosForm(ModelForm):
+class UsuariosForm(UserCreationForm):
     class Meta:
         model = Usuarios
-        fields = ['email']
+        fields = ['username','email','password1', 'password2']

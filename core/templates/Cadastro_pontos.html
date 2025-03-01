@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastrar Pontos</title>
 </head>
 <body>
-    
-    <p>cadastro de pontos: </p>
+    <p>Cadastro de pontos de Coleta: </p>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form_ponto.as_p }}
-<p><input type="submit" value="cadastrar"/></p>
+    <p><input type="submit" value="cadastrar"/></p>
+    </form>
 </body>
 </html>

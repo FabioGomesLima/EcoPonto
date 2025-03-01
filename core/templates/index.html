@@ -15,12 +15,18 @@
         <div class="logo">EcoPonto</div>
         <nav class="menu">
             <a href="#">Tipos de Lixo</a>
-            <a href="#">Pontos de Coleta</a>
+            <a href="{% url 'Listar_pontos' %}">Pontos de Coleta</a>
             <a href="#">Dicas de Descarte</a>
             <a href="#">Materiais Recicláveis</a>
+            {% if user.is_superuser %}
+                <a href="{% url 'ponto_cadastrar' %}">Cadastrar Ponto</a>
+            {% endif %}
         </nav>
         <div class="botao-menu">
             <a href="{% url 'Listar_pontos' %}">Onde Descartar?</a>
+        </div>
+        <div class="botao-menu">
+            <a href="{% url 'cadastrar_coletor' %}">Se tornar um coletor</a>
         </div>
     </header>
 

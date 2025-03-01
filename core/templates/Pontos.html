@@ -23,10 +23,13 @@
             {% endif %}
         </div>
         <hr>
+    {% if user.is_superuser %}
+        <p><a href="{% url 'ponto_cadastrar' %}">Cadastrar ponto de coleta</a></p>
+        <p><a href="{% url 'editar_ponto' ponto.id%}"> Editar ponto de coleta</a></p>
+    {% endif %}
     {% empty%}
     <p>sem pontos cadastrados </p>
     {% endfor %}
-    <p><a href="{% url 'ponto_cadastrar' %}">Link para cadastrar ponto de coleta</a></p>
     
 </body>
 </html>
