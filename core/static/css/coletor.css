@@ -1,0 +1,99 @@
+/* Estilo geral */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;  /* Fundo principal preto escuro */
+    margin: 0;
+    padding: 0;
+    color: #fff;  /* Texto branco para contraste */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;  /* Centraliza verticalmente em telas grandes */
+}
+
+/* Container principal */
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #333;  /* Fundo mais claro para o container */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* Título */
+h1 {
+    color: #4CAF50;  /* Verde para o título */
+    margin-bottom: 50px;
+    font-size: 1.8em;
+    width: 25%;
+
+}
+
+/* Formulário */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select,
+form textarea {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #4CAF50;  /* Borda verde */
+    border-radius: 5px;
+    background-color: #1e1e1e;  /* Fundo escuro para inputs */
+    color: #fff;  /* Texto branco */
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+/* Efeito ao focar nos inputs */
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #45a049;  /* Verde mais escuro no foco */
+}
+
+/* Placeholder dos inputs */
+form input::placeholder,
+form textarea::placeholder {
+    color: #ccc;  /* Placeholder mais claro */
+}
+
+/* Botão */
+.submit-btn {
+    background-color: #4CAF50;  /* Verde principal */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;  /* Verde mais escuro no hover */
+    transform: scale(1.02);  /* Leve aumento no hover */
+}
+
+/* Responsividade para telas menores*/
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;  /* Ajusta o tamanho do título */
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    .submit-btn {
+        padding: 8px 15px;
+    }
+}
