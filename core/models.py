@@ -21,3 +21,26 @@ class PontosDeColeta(models.Model):
     def __str__(self):
         return f"{self.tipo} - {self.descricao[:30]}" 
     
+    
+class PontoColeta(models.Model):
+     nome = models.CharField(max_length=100)
+     endereco = models.TextField()
+     latitude = models.FloatField()
+     longitude = models.FloatField()
+    
+     TIPOS_RESIDUO = [
+        ("eletronicos", "Eletrônicos"),
+        ("plastico", "Plástico"),
+        ("vidro", "Vidro"),
+        ("metal", "Metal"),
+        ("organico", "Orgânico"),
+    ]
+
+     tipo_residuo = models.CharField(
+        max_length=100,
+        choices=TIPOS_RESIDUO
+    )
+
+     def __str__(self):
+        return self.nome
+

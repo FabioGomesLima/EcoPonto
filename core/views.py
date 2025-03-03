@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import PontosDeColeta
 from .forms import PontoDeColetaForm, UsuariosForm
 from django.contrib import messages
+from django.http import JsonResponse
 
 def is_admin(user):
     return user.is_superuser
@@ -80,3 +81,11 @@ def editar_ponto(request, ponto_id):
   
   contexto = {'form_ponto': form}
   return render(request, 'Cadastro_pontos.html', contexto)
+
+def listar_pontos_coleta(request):
+    pontos = PontoColeta.objects.all()
+    data = [{"nome": p.nome, "latitude": p.latitude, "longitude": p.longitude, "tipo_residuo": p.tipo_residuo} for p in pontos]
+    return JsonResponse(data, safe=False)
+
+def mapa_pontos_coleta(request):
+    return render(request, 'mapa.html')

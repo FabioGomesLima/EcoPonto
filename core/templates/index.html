@@ -45,7 +45,10 @@
     <section class="container">
         <h2>Pontos de Coleta</h2>
         <p>Encontre locais próximos para descarte correto de resíduos.</p>
-        <button class="botao">Encontrar</button>
+        <a href="{% url 'mapa_pontos_coleta' %}">
+            <button class="botao">Encontrar</button>
+        </a>
+        
     </section>
 
     <!-- Seção do Gráfico -->
@@ -72,7 +75,7 @@
                 data: dados,
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false, // Permite ajustar o tamanho
+                    maintainAspectRatio: false, 
                     plugins: {
                         legend: { display: false } 
                     },

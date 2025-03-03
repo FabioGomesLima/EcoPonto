@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Coleta</title>
+
+    <!-- Estilos e Leaflet APIS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f0f0f0;
+        }
+        .mapa {
+            width: 90%;
+            max-width: 900px;
+            height: 500px;
+            margin: 20px auto;
+            border: 2px solid green;
+            border-radius: 8px;
+        }
+        .info {
+            background: white;
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+        }
+        .info img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Mapa de Coleta</h2>
+    <div class="mapa" id="mapa"></div>
+
+    <script>
+        var mapa = L.map('mapa').setView([-6.371595, -35.131286], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Mapa por <a href="https://www.openstreetmap.org/">OSM</a>'
+        }).addTo(mapa);
+
+        var icones = {
+            "Plástico": L.icon({ iconUrl: "{% static 'img/plastico.png' %}", iconSize: [30, 30] }),
+            "Vidro": L.icon({ iconUrl: "{% static 'img/vidro.png' %}", iconSize: [30, 30] }),
+            "Papel": L.icon({ iconUrl: "{% static 'img/papel.png' %}", iconSize: [30, 30] }),
+            "Metal": L.icon({ iconUrl: "{% static 'img/metal.png' %}", iconSize: [30, 30] }),
+            "Eletrônico": L.icon({ iconUrl: "{% static 'img/eletronico.png' %}", iconSize: [40, 40] }),
+            "Outros": L.icon({ iconUrl: "{% static 'img/default.png' %}", iconSize: [30, 30] })
+        };
+
+        // Ponto  no IFRN Canguaretama
+        L.marker([-6.371595, -35.131286], { icon: icones["Eletrônico"] })
+            .addTo(mapa)
+            .bindPopup(`
+                <b>Descarte Eletrônico</b><br>
+                📍 IFRN - Canguaretama<br>
+                👨‍🏫 Responsável: Prof. Evantuy<br>
+                📞 <a href="mailto:evantuy@ifrn.edu.br">evantuy@ifrn.edu.br</a>
+            `);
+
+        // Buscar pontos da API
+        fetch("{% url 'listar_pontos_coleta' %}")
+        .then(res => res.json())
+        .then(pontos => {
+            pontos.forEach(ponto => {
+                var icone = icones[ponto.tipo_residuo] || icones["Outros"];
+                L.marker([ponto.latitude, ponto.longitude], { icon: icone })
+                    .addTo(mapa)
+                    .bindPopup(`<b>${ponto.nome}</b><br>Tipo: ${ponto.tipo_residuo}`);
+            });
+        })
+        .catch(err => console.error('Erro:', err));
+
+        // legenda
+        var legenda = L.control({ position: 'bottomright' });
+
+        legenda.onAdd = function() {
+            var div = L.DomUtil.create('div', 'info');
+            div.innerHTML = `
+                <strong>Tipos de Resíduo:</strong><br>
+                <img src="{% static 'img/plastico.png' %}"> Plástico<br>
+                <img src="{% static 'img/vidro.png' %}"> Vidro<br>
+                <img src="{% static 'img/papel.png' %}"> Papel<br>
+                <img src="{% static 'img/metal.png' %}"> Metal<br>
+                <img src="{% static 'img/eletronico.png' %}"> Eletrônico<br>
+            `;
+            return div;
+        };
+
+        legenda.addTo(mapa);
+    </script>
+
+</body>
+</html>
