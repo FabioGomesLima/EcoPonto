@@ -17,17 +17,22 @@
             <a href="#">Tipos de Lixo</a>
             <a href="{% url 'Listar_pontos' %}">Pontos de Coleta</a>
             <a href="#">Dicas de Descarte</a>
-            <a href="#">Materiais Recicláveis</a>
             {% if user.is_superuser %}
-                <a href="{% url 'ponto_cadastrar' %}">Cadastrar Ponto</a>
+            <a href="{% url 'listar_pontos_coleta_admin' %}">Meus pontos de coleta</a>
+            <a href="{% url 'ponto_cadastrar' %}">Cadastrar Ponto</a>
+            {% else %}
+            <div class="botao-menu">
+                <a href="{% url 'cadastrar_coletor' %}">Se tornar um coletor</a>
+            </div>
             {% endif %}
+            
         </nav>
         <div class="botao-menu">
             <a href="{% url 'Listar_pontos' %}">Onde Descartar?</a>
         </div>
-        <div class="botao-menu">
-            <a href="{% url 'cadastrar_coletor' %}">Se tornar um coletor</a>
-        </div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Sair</a>
+        {% endif %}
     </header>
 
     <section class="banner">

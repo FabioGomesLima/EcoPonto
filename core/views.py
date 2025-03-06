@@ -4,6 +4,7 @@ from .models import PontosDeColeta
 from .forms import PontoDeColetaForm, UsuariosForm
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib.auth import logout
 
 def is_admin(user):
     return user.is_superuser
@@ -42,6 +43,18 @@ def Listar_pontos(request):
     }
     return render(request, 'Pontos.html',contexto )
   
+@login_required
+@user_passes_test(is_admin)
+def Listar_pontos_admin(request):
+    user = request.user
+    pontos = PontosDeColeta.objects.filter(usuario=user)
+    
+    contexto = { 
+         'todos_pontos': pontos     
+    }
+    
+    return render(request, 'Pontos.html', contexto)
+
 @login_required
 @user_passes_test(is_admin)
 def cadastrar_pontos(request):
@@ -83,9 +96,14 @@ def editar_ponto(request, ponto_id):
   return render(request, 'Cadastro_pontos.html', contexto)
 
 def listar_pontos_coleta(request):
-    pontos = PontoColeta.objects.all()
+    pontos = PontosDeColeta.objects.all()
     data = [{"nome": p.nome, "latitude": p.latitude, "longitude": p.longitude, "tipo_residuo": p.tipo_residuo} for p in pontos]
     return JsonResponse(data, safe=False)
 
 def mapa_pontos_coleta(request):
     return render(request, 'mapa.html')
+
+
+def custom_logout(request):
+    logout(request)
+    return redirect('index')
