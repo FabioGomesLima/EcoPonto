@@ -1,8 +1,15 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import PontoDeColetaSerializer
+from .serializers import PontoDeColetaSerializer, UsuariosSerializer
 from .models import PontosDeColeta
+
+@api_view(['PUT'])
+def usuarioAPIadicionar(request):
+    usuario = UsuariosSerializer(data=request.data)
+    if usuario.is_valid():
+        usuario.save()
+        return Response(usuario.data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
 def pontosAPIlistar(request):
