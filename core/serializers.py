@@ -9,4 +9,4 @@ class PontoDeColetaSerializer(serializers.ModelSerializer):
 class UsuariosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuarios
-        fields = ['email']
+        fields = ['username','email','password1', 'password2']
