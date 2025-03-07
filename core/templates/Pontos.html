@@ -1,37 +1,38 @@
-
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/pontosedit.css' %}">
-</head>
-<body>
-    <p>Listagem de pontos: </p>
-    {% for ponto in todos_pontos %}
-    <p>Tipo:{{ponto.tipo}}</p>
-    <p>Descrição:{{ponto.descricao}}</p>
-    {% if ponto.imagem %}
-    <p>Imagem: <img src="{{ ponto.imagem.url }}" alt="Imagem do ponto de coleta" width="500" height="300"></p>
-    {% endif %}
-            
+{% block content%}
+<p><a href="{% url 'index' %}" class="buttonVoltar">Voltar</a></p>
+<div class="conteudo">
+
+    <h2>Listagem de pontos:</h2>
+
+        {% for ponto in todos_pontos %}
+        <div class="pontos">
+        <div class="ponto">
+            <div class="imagem">
+                {% if ponto.imagem %}
+                <p> <img src="{{ ponto.imagem.url }}" alt="Imagem do ponto de coleta" width="300" height="200"></p>
+                {% endif %}
+            </div>
+            <div class="info">
+                <p>Tipo:{{ponto.tipo}}</p>
+                <p>Descrição:{{ponto.descricao}}</p>
+            </div>
+            <div class="funcionalidades">
+                
             {% if user.is_superuser %}
-                <form action="{% url 'ponto_excluir' ponto.id %}" method="POST" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" style="color: red;">Excluir</button>
-                </form>
+                <p><a href="{% url 'ponto_excluir' ponto.id %}" class="botaofunci botao-excluir">Excluir</a></p>
+                <p><a href="{% url 'ponto_cadastrar' %}" class="botaofunci botao-cadastrar">Cadastrar ponto de coleta</a></p>
+                <p><a href="{% url 'editar_ponto' ponto.id%}" class="botaofunci botao-editar"> Editar ponto de coleta</a></p>
             {% endif %}
+            <hr>
+            </div>
+            {% empty%}
+            <p>sem pontos cadastrados </p>
+            {% endfor %}
         </div>
-        <hr>
-    {% if user.is_superuser %}
-        <p><a href="{% url 'ponto_cadastrar' %}">Cadastrar ponto de coleta</a></p>
-        <p><a href="{% url 'editar_ponto' ponto.id%}"> Editar ponto de coleta</a></p>
-    {% endif %}
-    {% empty%}
-    <p>sem pontos cadastrados </p>
-    {% endfor %}
-    
-</body>
-</html>
+    </div>
+  
+
+</div>
+{% endblock %}

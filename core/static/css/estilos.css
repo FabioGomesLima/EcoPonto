@@ -7,6 +7,57 @@ body {
     color: white;
 }
 
+.buttonVoltar{
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border: none;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+/* Botões de funcionalidade */
+.botaofunci {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Botão Excluir (vermelho) */
+.botao-excluir {
+    background-color: #d9534f;
+}
+
+.botao-editar:hover {
+    background-color: orange;
+    transform: scale(1.05);
+}
+.botao-editar {
+    background-color: orange;
+}
+
+.botao-excluir:hover {
+    background-color: #c9302c;
+    transform: scale(1.05);
+}
+
+/* Botão Cadastrar (azul) */
+.botao-cadastrar {
+    background-color: #007bff;
+}
+
+.botao-cadastrar:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.info{
+    font-size: 18px;
+}
 
 .topo {
     display: flex;

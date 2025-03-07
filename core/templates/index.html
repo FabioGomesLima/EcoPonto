@@ -1,42 +1,7 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoPonto</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
-    <!-- Biblioteca Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
 
-    <header class="topo">
-        <div class="logo">EcoPonto</div>
-        <nav class="menu">
-            <a href="#">Tipos de Lixo</a>
-            <a href="{% url 'Listar_pontos' %}">Pontos de Coleta</a>
-            <a href="#">Dicas de Descarte</a>
-            {% if user.is_superuser %}
-            <a href="{% url 'listar_pontos_coleta_admin' %}">Meus pontos de coleta</a>
-            <a href="{% url 'ponto_cadastrar' %}">Cadastrar Ponto</a>
-            {% else %}
-            <div class="botao-menu">
-                <a href="{% url 'cadastrar_coletor' %}">Se tornar um coletor</a>
-            </div>
-            {% endif %}
-            
-        </nav>
-        <div class="botao-menu">
-            <a href="{% url 'Listar_pontos' %}">Onde Descartar?</a>
-        </div>
-        {% if user.is_authenticated %}
-        <form action="{% url 'logout' %}" method="post" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit" class="logout-btn">Sair</button>
-        </form>
-        {% endif %}
-    </header>
+{% block content%}
 
     <section class="banner">
         <h1>Cuide do planeta, descarte corretamente.</h1>
@@ -103,6 +68,5 @@
             margin: auto;
         }
     </style>
+{% endblock %}
 
-</body>
-</html>
