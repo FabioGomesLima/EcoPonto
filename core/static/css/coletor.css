@@ -7,31 +7,17 @@ body {
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;  /* Centraliza verticalmente */
-    align-items: center;      /* Centraliza horizontalmente */
+    justify-content: center;
+    align-items: center;
     min-height: 100vh;  /* Garante altura mínima para a tela inteira */
 }
 
-/* Container principal */
-.container {
-    width: 90%;
-    max-width: 500px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #333;  /* Fundo mais claro para o container */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-}
-
-/* Títulos */
+/* Título */
 h1 {
     color: #4CAF50;  /* Verde para o título */
     margin-bottom: 20px;
-    font-size: 1.8em;  /* Tamanho padrão para telas maiores */
+    font-size: 2em;
     text-align: center;
-    display: flex;
-    justify-content: center;  /* Centraliza horizontalmente */
 }
 
 /* Formulário */
@@ -40,22 +26,51 @@ form {
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    background-color: #333;  /* Fundo para o formulário */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-form input[type="text"],
-form input[type="email"],
-form input[type="password"],
-form select,
-form textarea {
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #4CAF50;  /* Borda verde */
+/* Container para os botões de "Cadastrar" e "Login" */
+.button-container {
+    display: flex;
+    gap: 10px;  /* Espaço entre os botões */
+}
+
+/* Estilo do botão de "Cadastrar" */
+form input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
     border-radius: 5px;
-    background-color: #1e1e1e;  /* Fundo escuro para inputs */
-    color: #fff;  /* Texto branco */
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-    margin-bottom: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+form input[type="submit"]:hover {
+    background-color: #45a049;
+    transform: scale(1.02);
+}
+
+/* Estilo do botão de login */
+.login-btn {
+    display: inline-block;
+    background-color: #333;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.login-btn:hover {
+    background-color: #4CAF50;
+    color: #fff;
+    transform: scale(1.05);  /* Leve aumento no hover */
 }
 
 /* Efeito ao focar nos inputs */
@@ -71,68 +86,20 @@ form textarea::placeholder {
     color: #ccc;  /* Placeholder mais claro */
 }
 
-/* Botões */
-form input[type="submit"] {
-    background-color: #4CAF50;  /* Verde principal */
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-form input[type="submit"]:hover {
-    background-color: #45a049;  /* Verde mais escuro no hover */
-    transform: scale(1.02);  /* Leve aumento no hover */
-}
-
-/* Imagens (se houver) */
-img {
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    margin-bottom: 15px;
-}
-
-/* Rodapé fixo ao final da tela */
-footer {
-    background-color: #1e1e1e;  /* Fundo um pouco mais claro */
-    padding: 10px;
-    text-align: center;
-    border-top: 1px solid #333;
-    margin-top: auto;  /* Garante que o rodapé fique no final */
-}
-
-footer a {
-    color: #4CAF50;  /* Verde para o link do rodapé */
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-footer a:hover {
-    color: #45a049;  /* Verde mais escuro no hover */
-}
-
 /* Responsividade para telas menores */
 @media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
-
     h1 {
-        font-size: 1.2em;  /* Ajusta o tamanho do título para telas pequenas */
+        font-size: 1.5em;  /* Ajusta o tamanho do título */
     }
 
-    form input[type="submit"] {
+    form input[type="submit"],
+    .login-btn {
         padding: 8px 15px;
         font-size: 14px;
     }
 
-    form input[type="text"],
-    form input[type="email"],
-    form input[type="password"],
-    form select,
-    form textarea {
-        width: 100%;  /* Ajusta inputs para telas menores */
+    .button-container {
+        flex-direction: column;  /* Coloca os botões na vertical em telas pequenas */
+        gap: 10px;
     }
 }
