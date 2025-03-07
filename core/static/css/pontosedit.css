@@ -1,0 +1,74 @@
+/* Fundo da página de edit e excluir */
+body {
+    background-color: #121212;  /* Fundo escuro */
+    color: #fff;  /* Texto branco para contraste */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Títulos e parágrafos */
+p {
+    color: #4CAF50;  /* Verde para o texto */
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Imagens */
+img {
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 15px;
+}
+
+/* Botões */
+button, a {
+    background-color: #4CAF50;  /* Verde principal */
+    color: #fff;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover, a:hover {
+    background-color: #45a049;  /* Verde mais escuro no hover */
+    transform: scale(1.02);  /* Leve aumento no hover */
+}
+
+/* Botão excluir em vermelho */
+button[type="submit"] {
+    background-color: white;  /* Vermelho para excluir */
+    color: #fff;
+}
+
+button[type="submit"]:hover {
+    background-color: #d32f2f;  /* Vermelho mais escuro no hover */
+}
+
+/* Separador */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #333;
+    margin: 20px 0;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    button, a {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
