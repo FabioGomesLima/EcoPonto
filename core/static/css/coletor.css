@@ -4,12 +4,11 @@ body {
     background-color: #121212;  /* Fundo escuro */
     color: #fff;  /* Texto branco para contraste */
     margin: 0;
-    padding: 0;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    min-height: 100vh;  /* Garante altura mínima para a tela inteira */
+    min-height: 100vh;  /* Garante que a página ocupe toda a altura */
 }
 
 /* Título */
@@ -22,24 +21,68 @@ h1 {
 
 /* Formulário */
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
     background-color: #333;  /* Fundo para o formulário */
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 500px;  /* Limita a largura do formulário */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-/* Container para os botões de "Cadastrar" e "Login" */
+/* Estilo dos campos de entrada do Django */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #666;
+    border-radius: 5px;
+    background-color: #222;
+    color: #fff;
+    transition: border-color 0.3s;
+}
+
+/* Efeito ao focar nos inputs */
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #4CAF50;  /* Verde no foco */
+    outline: none;  /* Remove o outline padrão */
+}
+
+/* Placeholder dos inputs */
+form input::placeholder,
+form textarea::placeholder {
+    color: #aaa;  /* Placeholder mais claro */
+}
+
+/* Estilo dos erros do Django */
+ul.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+    color: #ff6b6b;  /* Vermelho para erros */
+}
+
+ul.errorlist li {
+    margin-bottom: 5px;
+}
+
+/* Container dos botões */
 .button-container {
     display: flex;
-    gap: 10px;  /* Espaço entre os botões */
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-/* Estilo do botão de "Cadastrar" */
-form input[type="submit"] {
+/* Botão de "Cadastrar" */
+.submit-btn {
     background-color: #4CAF50;
     color: #fff;
     border: none;
@@ -49,15 +92,15 @@ form input[type="submit"] {
     transition: background-color 0.3s, transform 0.2s;
 }
 
-form input[type="submit"]:hover {
+.submit-btn:hover {
     background-color: #45a049;
     transform: scale(1.02);
 }
 
-/* Estilo do botão de login */
-.login-btn {
+/* Botão de "Login" */
+.btn {
     display: inline-block;
-    background-color: #333;
+    background-color: transparent;
     color: #4CAF50;
     border: 2px solid #4CAF50;
     padding: 10px 20px;
@@ -67,23 +110,10 @@ form input[type="submit"]:hover {
     transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 
-.login-btn:hover {
+.btn:hover {
     background-color: #4CAF50;
     color: #fff;
-    transform: scale(1.05);  /* Leve aumento no hover */
-}
-
-/* Efeito ao focar nos inputs */
-form input:focus,
-form textarea:focus,
-form select:focus {
-    border-color: #45a049;  /* Verde mais escuro no foco */
-}
-
-/* Placeholder dos inputs */
-form input::placeholder,
-form textarea::placeholder {
-    color: #ccc;  /* Placeholder mais claro */
+    transform: scale(1.05);
 }
 
 /* Responsividade para telas menores */
@@ -92,14 +122,18 @@ form textarea::placeholder {
         font-size: 1.5em;  /* Ajusta o tamanho do título */
     }
 
-    form input[type="submit"],
-    .login-btn {
-        padding: 8px 15px;
-        font-size: 14px;
+    form {
+        padding: 15px;
     }
 
     .button-container {
         flex-direction: column;  /* Coloca os botões na vertical em telas pequenas */
         gap: 10px;
+    }
+
+    .submit-btn,
+    .btn {
+        padding: 8px 15px;
+        font-size: 14px;
     }
 }
